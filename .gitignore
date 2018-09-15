@@ -1,0 +1,4 @@
+/client/dist/bundle.js
+.env
+/node_modules
+/client/src/components/Map/Container.jsx
