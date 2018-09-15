@@ -9,8 +9,8 @@ class App extends Component {
     return (
       <div>
         <h1>Hello World</h1>
-        <Map />
-        <Splash />
+        <Route path="/add-trip" component={Map} />
+        <Route path="/" component={Splash} />
       </div>
 
     );
