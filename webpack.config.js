@@ -55,5 +55,12 @@ module.exports = {
       ]
     }
     ]
-  }
+  },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        GOOGLEMAPS_API_KEY: JSON.stringify(`${process.env.GOOGLEMAPS_API_KEY}`)
+      }
+    })
+  ]
 };
