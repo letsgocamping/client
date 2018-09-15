@@ -16,8 +16,8 @@ class App extends Component {
     const { classes } = this.props;
     return (
       <div className={classes.app}>
-        <Route path="/add-trip" component={AddTripPage} />
-        <Route path="/" component={Splash} />
+        <Route exact path="/add-trip" component={AddTripPage} />
+        <Route exact path="/" component={Splash} />
       </div>
 
     );
