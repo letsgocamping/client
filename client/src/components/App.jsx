@@ -1,15 +1,22 @@
 import React, { Component } from 'react';
-// import { Layout, Header, HeaderRow, Textfield, Drawer, Content, Navigation } from 'react-mdl'
-// import './App.css';
-import Map from './Map.jsx';
+import { Route } from 'react-router-dom';
+import AddTripPage from './addTripPage/AddTripPage.jsx';
 import Splash from './Splash.jsx';
+import { withStyles } from '@material-ui/core/styles';
 
+const styles = theme => ({
+  app: {
+    display: 'table',
+    height: '100vh',
+    margin: '0 auto'
+  }
+});
 class App extends Component {
   render() {
+    const { classes } = this.props;
     return (
-      <div>
-        <h1>Hello World</h1>
-        <Route path="/add-trip" component={Map} />
+      <div className={classes.app}>
+        <Route path="/add-trip" component={AddTripPage} />
         <Route path="/" component={Splash} />
       </div>
 
@@ -17,4 +24,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withStyles(styles)(App);
