@@ -1,24 +1,44 @@
-var webpack = require('webpack');
+var path = require('path');
+var SRC_DIR = path.join(__dirname, '/client/src');
+var DIST_DIR = path.join(__dirname, '/client/dist');
+
+
+/* === dont forget to import scss to main.js file === */
+/* ===> import './main.scss'; <=== */
+
+
 var path = require('path');
 
-var BUILD_DIR = path.resolve(__dirname, 'client/dist');
-var APP_DIR = path.resolve(__dirname, 'client/src');
-
-var config = {
-  entry: APP_DIR + '/index.jsx',
+module.exports = {
+  entry: `${SRC_DIR}/index.jsx`,
   output: {
-    path: BUILD_DIR,
-    filename: 'bundle.js'
+    path: DIST_DIR,
+    filename: 'bundle.js',
+    publicPath: '/dist'
   },
   module: {
-    rules: [
-      {
-        test: /\.jsx?/,
-        include: APP_DIR,
-        use: ['babel-loader', 'eslint-loader']
+    rules: [{
+      test: /\.jsx$/,
+      use: {
+        loader: 'babel-loader',
+        options: {
+          presets: ['es2015', 'react']
+        }
       }
+    },
+    {
+      test: /\.scss$/,
+      use: [{
+        loader: 'style-loader' // creates style nodes from JS strings
+      },
+      {
+        loader: 'css-loader' // translates CSS into CommonJS
+      },
+      {
+        loader: 'sass-loader' // compiles Sass to CSS
+      }
+      ]
+    }
     ]
   }
 };
-
-module.exports = config;
