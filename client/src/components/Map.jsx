@@ -12,10 +12,11 @@ export default class Map extends React.Component {
         return (
             <div style={{ height: '100vh', width: '100%' }}>
                 <GoogleMapReact
-                    bootstrapURLKeys={{ key: /* YOUR KEY HERE */ }}
+                    bootstrapURLKeys={{ key: process.env.GOOGLEMAP_API_KEY }}
                     defaultCenter={this.props.center}
                     defaultZoom={this.props.zoom}
-                 / >
+                 />
+            </div>
         );
     }
 }
