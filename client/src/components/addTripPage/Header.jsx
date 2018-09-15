@@ -6,11 +6,11 @@ const styles = theme => ({
   background: {
     backgroundImage: 'url(https://images.unsplash.com/photo-1529288871968-9945adb0588f?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1600&h=900&fit=crop&ixid=eyJhcHBfaWQiOjF9&s=a0aa44a088abfb97ae739701cf59f98c)',
     backgroundSize: 'cover',
-    height: '100vh'
+    height: '30vh'
   },
   foreground: {
     backgroundColor: 'rgba(0, 0, 0, 0.4)',
-    height: '100vh',
+    height: '30vh',
     width: '100vw',
     display: 'table'
   },
