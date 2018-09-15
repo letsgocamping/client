@@ -1,4 +1,5 @@
 import React from 'react';
+import GoogleMapReact from 'google-map-react';
 
 
 export default class Map extends React.Component {
@@ -9,9 +10,12 @@ export default class Map extends React.Component {
 
     render() {
         return (
-            <div>
-            <h2>Yo</h2>
-            </div>
+            <div style={{ height: '100vh', width: '100%' }}>
+                <GoogleMapReact
+                    bootstrapURLKeys={{ key: /* YOUR KEY HERE */ }}
+                    defaultCenter={this.props.center}
+                    defaultZoom={this.props.zoom}
+                 / >
         );
     }
 }
