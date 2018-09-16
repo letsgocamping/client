@@ -51,52 +51,22 @@ const styles = theme => ({
 class Splash extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      email: '',
-      redirectToAddTrip: false,
-      redirectToDecisions: false
-    };
-  }
-
-  handleChange = (e) => {
-    this.setState({ email: e.target.value });
   }
 
   handleEnterPress = e => {
     if (e.key === 'Enter') {
-      this.submitForm(this.state.email);
+      this.props.submitForm(this.props.email);
     }
-  }
-
-  submitForm = email => {
-    console.log('you submitted a form!');
-    console.log(email);
-    axios.get(`${api_url}/api/account/${email}`)
-      .then(res => {
-        console.log(res);
-        if (!res.data.length) {
-          this.setState({
-            redirectToAddTrip: true
-          });
-        } else {
-          this.setState({
-            redirectToDecisions: true
-          });
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      });
   }
 
   render() {
     const { classes } = this.props;
 
-    if (this.state.redirectToAddTrip) {
+    if (this.props.redirectToAddTrip) {
       return (<Redirect to={{ pathname: '/add-trip'}} />);
     }
 
-    if (this.state.redirectToDecisions) {
+    if (this.props.redirectToDecisions) {
       return (<Redirect to={{ pathname: '/decisions'}} />);
     }
 
@@ -109,8 +79,8 @@ class Splash extends React.Component {
               id="email"
               label="Email Address"
               className={classes.textField}
-              value={this.state.email}
-              onChange={this.handleChange}
+              value={this.props.email}
+              onChange={this.props.handleChange}
               onKeyPress={this.handleEnterPress}
               margin="normal"
               InputProps={{

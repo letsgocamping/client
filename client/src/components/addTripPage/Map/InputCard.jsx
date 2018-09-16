@@ -12,7 +12,8 @@ import Typography from '@material-ui/core/Typography';
 
 const styles = theme => ({
   card: {
-    maxWidth: '100%'
+    maxWidth: '90%',
+    margin: '10px auto'
   },
   media: {
     objectFit: 'cover',
@@ -20,6 +21,7 @@ const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
+    marginTop: 0,
     width: '80%',
   },
   button: {
@@ -35,22 +37,15 @@ class InputCard extends React.Component {
     };
   }
 
-  componentDidMount() {
-    console.log('NEW CARD', this.props.number);
-  }
-
   render() {
-
     const { classes } = this.props;
     return (
       <Card className={classes.card}>
-        <CardActionArea>
-          <CardContent>
-            <Typography gutterBottom variant="headline" component="h2">
-            Member City
-            </Typography>
-          </CardContent>
-        </CardActionArea>
+        <CardContent>
+          <Typography gutterBottom variant="headline" component="h2">
+            Friend #{this.props.number}
+          </Typography>
+        </CardContent>
         <CardActions>
           <TextField
             id="City"

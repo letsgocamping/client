@@ -30,13 +30,19 @@ const styles = theme => ({
 });
 
 class Header extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  
+
   render() {
     const { classes } = this.props;
     return (
       <div className={classes.background}>
         <div className={classes.foreground}>
           <div className={classes.section}>
-            <Link to="/" className={classes.link}>
+            <Link to="/" onClick={() => this.props.handleHomeClick()} className={classes.link}>
               <Typography variant='display2' className={classes.text}>Let's Go Camping!</Typography>
             </Link>
           </div>
