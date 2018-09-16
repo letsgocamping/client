@@ -11,6 +11,8 @@ import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import InputCard from './InputCard.jsx';
 import { api_key, api_url } from '../../../../../config.js';
+import { Dialog, DialogTitle, DialogActions } from '@material-ui/core';
+import { Redirect } from 'react-router-dom';
 
 
 const style = theme => ({
@@ -47,7 +49,9 @@ class Container extends React.Component {
       cities: [],
       parks: {},
       parksParse: [],
-      searched: false
+      searched: false,
+      renderDialog: false,
+      redirectToPreviousSearches: false
     };
   }
 
@@ -162,7 +166,9 @@ class Container extends React.Component {
         }
       })
       .then((res) => {
-        alert('Your search was successfully saved!');
+        this.setState({
+          renderDialog: true
+        });
         console.log(res);
       })
       .catch((err) => console.error(err));
@@ -188,6 +194,45 @@ class Container extends React.Component {
     const { classes, coordinates } = this.props;
     const { value } = this.state;
 
+    if (this.state.renderDialog) {
+      return (
+        <Dialog
+          open={true}
+          onClose={() => {
+            this.setState({
+              renderDialog: false
+            });
+          }}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">{'Your search was successfully saved!'}</DialogTitle>
+          <DialogActions>
+          <Button onClick={() => {
+              this.setState({
+                renderDialog: false,
+                redirectToPreviousSearches: true
+              })
+            }} color="primary" autoFocus>
+          GO TO PREVIOUS SEARCHES
+            </Button>
+            <Button onClick={() => {
+              this.setState({
+                renderDialog: false
+              })
+            }} color="primary" autoFocus>
+          OKAY
+            </Button>
+          </DialogActions>
+        </Dialog>
+      );
+    }
+
+    if (this.state.redirectToPreviousSearches) {
+      return (
+        <Redirect to={{ pathname: '/triplist'}} />
+      );
+    }
 
     return (
       <div className={classes.main}>
