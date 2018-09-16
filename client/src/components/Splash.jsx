@@ -72,7 +72,7 @@ class Splash extends React.Component {
     axios.get(`http://localhost:1337/api/account/${email}`)
       .then(res => {
         console.log(res);
-        if (res.data.length) {
+        if (!res.data.length) {
           this.setState({
             redirectToAddTrip: true
           });
