@@ -2,6 +2,7 @@ import React from 'react';
 import GoogleMapReact from 'google-map-react';
 import Location from './Location.jsx';
 import { fitBounds } from 'google-map-react/utils';
+import UserLocation from './UserLocation.jsx';
 
 const bounds = {
   nw: {
@@ -29,7 +30,13 @@ export default class Map extends React.Component {
     this.state = {
       lat: Number(this.props.coordinates.lat),
       lng: this.props.coordinates.lng,
-      zoom: 4
+      zoom: 4,
+      users: [
+        {
+          lat: 35.691544,
+          lng: -105.944183
+        }
+      ]
     };
   }
 
@@ -62,8 +69,13 @@ export default class Map extends React.Component {
           <Location
             lat={this.state.lat}
             lng={this.state.lng}
-            text={'Here"s the thing' }
           />
+          {this.state.users.map(user=>{
+            return <UserLocation
+              lat={user.lat}
+              lng={user.lng}
+            />;
+          })}
         </GoogleMapReact>
 
       </div>
