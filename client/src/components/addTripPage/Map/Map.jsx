@@ -56,6 +56,13 @@ export default class Map extends React.Component {
               lng={user[1]}
             />;
           })}
+
+          {this.props.parks.map(park=>{
+            return <Location 
+              lat={park[0]}
+              lng={park[1]}
+            />;
+          })}
         </GoogleMapReact>
 
       </div>
