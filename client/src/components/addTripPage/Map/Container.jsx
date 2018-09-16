@@ -168,6 +168,9 @@ class Container extends React.Component {
         }
       })
       .then((res) => {
+        this.props.getTrips(this.props.email);
+      })
+      .then((res) => {
         this.setState({
           renderDialog: true
         });
@@ -210,7 +213,7 @@ class Container extends React.Component {
         >
           <DialogTitle id="alert-dialog-title">{'Your search was successfully saved!'}</DialogTitle>
           <DialogActions>
-          <Button onClick={() => {
+            <Button onClick={() => {
               this.setState({
                 renderDialog: false,
                 redirectToPreviousSearches: true

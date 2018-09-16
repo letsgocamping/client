@@ -32,6 +32,15 @@ class App extends Component {
     this.setState({ email: e.target.value });
   }
 
+  getTrips = email => {
+    axios.get(`${api_url}/api/account/${email}`)
+      .then((res) => {
+        console.log(res.data);
+        this.setState({ trips: res.data });
+      })
+      .catch((err) => console.error(err));
+  }
+
   submitForm = email => {
     axios.get(`${api_url}/api/account/${email}`)
       .then(res => {
@@ -69,6 +78,7 @@ class App extends Component {
             handleHomeClick={this.handleHomeClick}
             email={this.state.email}
             trips={this.state.trips}
+            getTrips={this.getTrips}
           />;
         }} />
         <Route exact path="/decisions" component={Decisions} />

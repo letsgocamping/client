@@ -14,7 +14,7 @@ class AddTripPage extends React.Component {
     return (
       <div>
         <Header handleHomeClick={this.props.handleHomeClick}/>
-        <Container email={this.props.email}/>
+        <Container email={this.props.email} trips={this.props.trips} getTrips={this.props.getTrips}/>
       </div>
     );
   }
