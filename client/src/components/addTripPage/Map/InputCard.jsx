@@ -33,14 +33,6 @@ class InputCard extends React.Component {
     this.state = {
       name: null
     };
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange(e) {
-    console.log('e', e.target.value);
-    this.setState({
-      name: e.target.value,
-    });
   }
 
   render() {
@@ -49,13 +41,6 @@ class InputCard extends React.Component {
     return (
       <Card className={classes.card}>
         <CardActionArea>
-          {/* <CardMedia
-            component="img"
-            className={classes.media}
-            height="140"
-            image="/static/images/cards/contemplative-reptile.jpg"
-            title="Contemplative Reptile"
-          /> */}
           <CardContent>
             <Typography gutterBottom variant="headline" component="h2">
             Member City
@@ -68,7 +53,7 @@ class InputCard extends React.Component {
             label="City"
             className={classes.textField}
             value={this.state.name}
-            onChange={()=>{ this.handleChange(e); }}
+            onChange={(e)=>{ this.props.handleCardInput(e); }}
             margin="normal"
           />
           <Button size="large" color="primary" className={classes.button} >
