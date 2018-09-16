@@ -66,14 +66,18 @@ export default class Map extends React.Component {
           }
           defaultZoom={this.state.zoom}
         > 
-          <Location
-            lat={this.state.lat}
-            lng={this.state.lng}
-          />
-          {this.state.users.map(user=>{
+          {this.props.searched ? 
+            <Location
+              lat={this.props.lat}
+              lng={this.props.lng}
+            />
+            :
+            null
+          }
+          {this.props.users.map(user=>{
             return <UserLocation
-              lat={user.lat}
-              lng={user.lng}
+              lat={user[0]}
+              lng={user[1]}
             />;
           })}
         </GoogleMapReact>

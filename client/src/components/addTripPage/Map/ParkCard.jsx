@@ -46,8 +46,8 @@ class ParkCard extends React.Component {
         <Card className={classes.cardDesktop}>
           <CardMedia
             className={classes.imageDesktop}
-            image='https://www.nps.gov/common/uploads/structured_data/3C7D2FBB-1DD8-B71B-0BED99731011CFCE.jpg'
-            title={this.props.park.name}
+            image={this.props.park.images[0].url}
+            title={this.props.park.images[0].title}
           />
           <div className={classes.textDesktop}>
             <CardContent className={classes.contentDesktop}>
