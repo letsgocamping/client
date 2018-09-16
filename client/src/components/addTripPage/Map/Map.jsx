@@ -3,7 +3,7 @@ import GoogleMap from 'google-map-react';
 import Location from './Location.jsx';
 import UserLocation from './UserLocation.jsx';
 import MidPoint from './Midpoint.jsx';
-import Polyline from './Polyline.jsx';
+// import Polyline from './Polyline.jsx';
 
 export default class Map extends React.Component {
   constructor(props) {
@@ -15,21 +15,21 @@ export default class Map extends React.Component {
       zoom: 4,
       mapLoaded: false
     };
-    this.renderPolylines = this.renderPolylines.bind(this);
+    // this.renderPolylines = this.renderPolylines.bind(this);
   }
 
-  renderPolylines(map, maps) {
-    /** Example of rendering geodesic polyline */
-    console.log('HELO I\'M FIRING', this.props.users);
-    let geodesicPolyline = new maps.Polyline({
-      path: this.state.users,
-      geodesic: true,
-      strokeColor: '#00a1e1',
-      strokeOpacity: 1.0,
-      strokeWeight: 4
-    });
-    geodesicPolyline.setMap(map);
-  }
+  // renderPolylines(map, maps) {
+  //   /** Example of rendering geodesic polyline */
+  //   console.log('HELO I\'M FIRING', this.props.users);
+  //   let geodesicPolyline = new maps.Polyline({
+  //     path: this.state.users,
+  //     geodesic: true,
+  //     strokeColor: '#00a1e1',
+  //     strokeOpacity: 1.0,
+  //     strokeWeight: 4
+  //   });
+  //   geodesicPolyline.setMap(map);
+  // }
 
   componentDidUpdate(prevProps) {
     if (this.props.coordinates !== prevProps.coordinates) {
