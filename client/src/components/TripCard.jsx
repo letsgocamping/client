@@ -14,7 +14,8 @@ const styles = theme => ({
   },
   textDesktop: {
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    width: '80%'
   },
   contentDesktop: {
     flex: '1 0 auto',
@@ -22,7 +23,6 @@ const styles = theme => ({
   },
   imageDesktop: {
     width: 189,
-    height: 189,
     position: 'relative'
   },
   buttonsDesktop: {
@@ -75,15 +75,24 @@ class TripCard extends React.Component {
 
   render() {
     const { classes } = this.props;
-    console.log(this.props);
+    let imageURL = '';
+    let imageTitle = '';
+
+    if (this.props.trip.parks[0]) {
+      imageURL = this.props.trip.parks[0].images[0].url;
+      imageTitle = this.props.trip.parks[0].images[0].title;
+    } else {
+      imageURL = 'https://econclassroom.com/wp-content/uploads/2017/03/forest.jpg';
+      imageTitle = 'generic picture of forest';
+    }
 
     return (
       <Grid item xs={12} className={classes.grid}>
         <Card className={classes.cardDesktop}>
           <CardMedia
             className={classes.imageDesktop}
-            image={this.props.trip.parks[0].images[0].url}
-            title={this.props.trip.parks[0].images[0].title}
+            image={imageURL}
+            title={imageTitle}
           />
           <div className={classes.textDesktop}>
             <CardContent className={classes.contentDesktop}>
