@@ -44,6 +44,7 @@ class Container extends React.Component {
       cards: [{ number: 0, city: null, state: null }],
       cardNumber: 0,
       cities: [],
+      searched: false,
       parks: {
         'total': 3,
         'data': [
@@ -137,7 +138,7 @@ class Container extends React.Component {
 
   tabSelect() {
     if (this.state.tab === 0) {
-      return <Map coordinates={{ lng: this.state.lng, lat: this.state.lat }} apiKey={this.state.key} />;      
+      return <Map coordinates={{ lng: this.state.lng, lat: this.state.lat }} apiKey={this.state.key} users={this.state.cities} searched={this.state.searched}/>;      
     } else {
       return <ParksList parks={this.state.parks.data}/>;
     }
@@ -169,7 +170,9 @@ class Container extends React.Component {
         console.log('RESPLY', reply);
         this.setState({
           lat: reply.data.lat,
-          lng: reply.data.lon
+          lng: reply.data.lon,
+          cities: reply.data.cities,
+          searched: true,
         },
         ()=> { console.log('NEWMIDPOINTSTATE:', this.state.lat, this.state.lng); });
       });
