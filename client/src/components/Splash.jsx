@@ -2,6 +2,7 @@ import React from 'react';
 import { TextField, Typography, Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import axios from 'axios';
+import { api_url } from '../../../config.js';
 import { Redirect } from 'react-router-dom';
 
 const styles = theme => ({
@@ -70,7 +71,7 @@ class Splash extends React.Component {
   submitForm = email => {
     console.log('you submitted a form!');
     console.log(email);
-    axios.get(`http://localhost:1337/api/account/${email}`)
+    axios.get(`${api_url}/api/account/${email}`)
       .then(res => {
         console.log(res);
         if (!res.data.length) {
