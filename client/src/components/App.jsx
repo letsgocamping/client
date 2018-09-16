@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import AddTripPage from './addTripPage/AddTripPage.jsx';
+import Decisions from './Decisions.jsx';
 import Splash from './Splash.jsx';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -16,6 +17,7 @@ class App extends Component {
     const { classes } = this.props;
     return (
       <div className={classes.app}>
+        <Route exact path="/decisions" component={Decisions} />
         <Route exact path="/add-trip" component={AddTripPage} />
         <Route exact path="/" component={Splash} />
       </div>
