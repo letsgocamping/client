@@ -35,6 +35,8 @@ class Container extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      centerLat: 37.697948,
+      centerLng: -97.314835,
       lng: -97.314835,
       lat: 37.697948,
       tab: 0,
@@ -88,7 +90,7 @@ class Container extends React.Component {
 
   tabSelect() {
     if (this.state.tab === 0) {
-      return <Map coordinates={{ lng: this.state.lng, lat: this.state.lat }} apiKey={this.state.key} users={this.state.cities} searched={this.state.searched}/>;      
+      return <Map coordinates={{ lng: this.state.lng, lat: this.state.lat, centerLat: this.state.centerLat, centerLng: this.state.centerLng }} apiKey={this.state.key} users={this.state.cities} searched={this.state.searched}/>;      
     } else {
       return <ParksList parks={this.state.parks.data}/>;
     }
@@ -120,12 +122,14 @@ class Container extends React.Component {
         console.log('RESPLY', reply);
         this.setState({
           lat: reply.data.lat,
+          centerlat: reply.data.lat,
+          centerlng: reply.data.lon,
           lng: reply.data.lon,
           parks: JSON.parse(reply.data.parks),
           cities: reply.data.cities,
           searched: true
         },
-        ()=> { console.log('NEWMIDPOINTSTATE:', this.state.lat, this.state.lng); });
+        ()=> { console.log('NEWMIDPOINTSTATE:', this.state.lat, this.state.lng, this.state.parks); });
       });
   }
 
