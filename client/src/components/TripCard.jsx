@@ -75,6 +75,7 @@ class TripCard extends React.Component {
 
   render() {
     const { classes } = this.props;
+    console.log(this.props);
 
     return (
       <Grid item xs={12} className={classes.grid}>
