@@ -2,6 +2,7 @@ import React from 'react';
 import GoogleMapReact from 'google-map-react';
 import Location from './Location.jsx';
 import UserLocation from './UserLocation.jsx';
+import MidPoint from './Midpoint.jsx';
 
 export default class Map extends React.Component {
   constructor(props) {
@@ -33,7 +34,7 @@ export default class Map extends React.Component {
           defaultZoom={this.state.zoom}
         > 
           {this.props.searched ? 
-            <Location
+            <MidPoint
               lat={this.props.coordinates.lat}
               lng={this.props.coordinates.lng}
             />
