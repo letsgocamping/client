@@ -9,7 +9,7 @@ import { withStyles } from '@material-ui/core/styles';
 const styles = theme => ({
   background: {
     backgroundColor: '#CFCFCE',
-    paddingBottom: '1px',
+    padding: '15px',
     borderRadius: '0'
   },
 
@@ -19,7 +19,7 @@ const styles = theme => ({
   },
 
   button: {
-    margin: '0 auto'
+    margin: '10px auto'
   }
 });
 

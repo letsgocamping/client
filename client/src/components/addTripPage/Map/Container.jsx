@@ -28,7 +28,8 @@ const style = theme => ({
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
     border: '1px solid #4054B2',
-    height: '100%'
+    height: '100%',
+    overflow: 'scroll'
   }
 
 });
