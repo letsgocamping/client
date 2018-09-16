@@ -50,19 +50,6 @@ class Container extends React.Component {
     this.submitCities = this.submitCities.bind(this);
   }
 
-  componentDidMount() {
-    this.getParks();
-  }
-
-  getParks = () => {
-    axios.post(`${api_url}/api/midpoint`, {
-      cities: this.state.cities
-    })
-      .then((res) => {
-        this.setState({ parks: JSON.parse(res.data.parks) });
-      });
-  }
-
   TabContainer(props) {
     return (
       <Typography component="div" style={{
@@ -132,7 +119,8 @@ class Container extends React.Component {
         console.log('RESPLY', reply);
         this.setState({
           lat: reply.data.lat,
-          lng: reply.data.lon
+          lng: reply.data.lon,
+          parks: JSON.parse(reply.data.parks)
         },
         ()=> { console.log('NEWMIDPOINTSTATE:', this.state.lat, this.state.lng); });
       });
