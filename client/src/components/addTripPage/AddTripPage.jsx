@@ -3,9 +3,16 @@ import Header from './Header.jsx';
 import Map from '../Map.jsx';
 
 class AddTripPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      addresses: []
+    };
+  }
+
   render() {
     return (
-      <div>
+      <div style={{ backgroundColor: '#fff7e4' }}>
         <Header />
         <Map />
       </div>

@@ -4,18 +4,18 @@ import AddTripPage from './addTripPage/AddTripPage.jsx';
 import Splash from './Splash.jsx';
 import { withStyles } from '@material-ui/core/styles';
 
-const styles = theme => ({
-  app: {
-    display: 'table',
-    height: '100vh',
-    margin: '0 auto'
-  }
-});
+// const styles = theme => ({
+//   app: {
+//     display: 'table',
+//     height: '100vh',
+//     margin: '0 auto'
+//   }
+// });
 class App extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <div className={classes.app}>
+      <div>
         <Route exact path="/add-trip" component={AddTripPage} />
         <Route exact path="/" component={Splash} />
       </div>
@@ -24,4 +24,4 @@ class App extends Component {
   }
 }
 
-export default withStyles(styles)(App);
+export default App;
