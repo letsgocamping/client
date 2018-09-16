@@ -40,7 +40,8 @@ class Container extends React.Component {
       lat: 37.697948,
       tab: 0,
       key: 'AIzaSyD644KvZJ8e2fs284KNmttNHnmmip0Kyf8',
-      cards: [{}],
+      cards: [{ number: 0, city: null }],
+      cardNumber: 0,
       cities: [],
       parks: {
         'total': 3,
@@ -142,8 +143,9 @@ class Container extends React.Component {
 
   addCard() {
     this.setState({
-      cards: this.state.cards.concat([{}]),
-    });
+      cardNumber: this.state.cardNumber + 1,
+      cards: this.state.cards.concat([{number: this.state.cardNumber, city: null}]),
+    }, ()=>{ console.log('Cards:', this.state.cards, this.state.cardNumber); });
   }
 
 
@@ -153,11 +155,13 @@ class Container extends React.Component {
     });
   }
 
-  handleCardInput(e) {
-    console.log('CARDINPUT', e.target.value);
+  handleCardInput(e, number) {
+    let oldState = this.state.cards;
+    oldState[number].city = e.target.value;
+    console.log('OLD STATE', oldState);
     this.setState({
-      state: e.target.value,
-    });
+      cards: oldState,
+    }, ()=>{ console.log('Newstate', this.state.cards); });
   }
 
   render() {
@@ -169,7 +173,7 @@ class Container extends React.Component {
       <div className={classes.main}>
         <div style={{ gridRow: 2 / 3, gridColumn: 1 / 2 }}>
           {this.state.cards.map(card =>{
-            return <InputCard number={this.state.cardNumber} handleCardInput={this.handleCardInput} submitCity={this.submitCity}/>;
+            return <InputCard key={card.number} number={this.state.cardNumber} handleCardInput={this.handleCardInput} submitCity={this.submitCity}/>;
           })}
           <Button onClick={()=> { this.addCard(); }} variant="fab" color="primary" aria-label="Add" className={classes.button}>
             <AddIcon />

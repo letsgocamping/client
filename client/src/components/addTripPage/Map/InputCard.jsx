@@ -35,6 +35,10 @@ class InputCard extends React.Component {
     };
   }
 
+  componentDidMount() {
+    console.log('NEW CARD', this.props.number);
+  }
+
   render() {
 
     const { classes } = this.props;
@@ -53,7 +57,7 @@ class InputCard extends React.Component {
             label="City"
             className={classes.textField}
             value={this.state.name}
-            onChange={(e)=>{ this.props.handleCardInput(e); }}
+            onChange={(e)=>{ this.props.handleCardInput(e, this.props.number); }}
             margin="normal"
           />
           <Button size="large" color="primary" className={classes.button} >
