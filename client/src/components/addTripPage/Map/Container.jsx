@@ -48,10 +48,6 @@ class Container extends React.Component {
       parks: null,
       searched: false
     };
-    this.tabSelect = this.tabSelect.bind(this);
-    this.handleCardCityInput = this.handleCardCityInput.bind(this);
-    this.handleCardStateInput = this.handleCardStateInput.bind(this);
-    this.submitCities = this.submitCities.bind(this);
   }
 
   TabContainer(props) {
@@ -83,13 +79,13 @@ class Container extends React.Component {
       });
   }
 
-  handleEnter(e) {
+  handleEnter = (e) => {
     this.setState({
       lat: e.target.value
     });
   }
 
-  tabSelect() {
+  tabSelect = () => {
     if (this.state.tab === 0) {
       return <Map coordinates={{ lng: this.state.lng, lat: this.state.lat, centerLat: this.state.centerLat, centerLng: this.state.centerLng }} apiKey={this.state.key} users={this.state.cities} searched={this.state.searched}/>;      
     } else {
@@ -101,16 +97,15 @@ class Container extends React.Component {
     }
   }
 
-  addCard() {
+  addCard = () => {
     this.setState({
       cardNumber: this.state.cardNumber + 1,
       cards: this.state.cards.concat([{number: this.state.cardNumber, city: null}]),
-    }, ()=>{ console.log('Cards:', this.state.cards, this.state.cardNumber); });
+    });
   }
 
 
-  submitCities() {
-    console.log('SUBMITCITIES');
+  submitCities = () => {
     let result = [];
     this.state.cards.forEach(card=>{
       result.push([card.city, card.state]);
@@ -124,7 +119,6 @@ class Container extends React.Component {
         }
       })
       .then((reply) =>{
-        console.log('RESPLY', reply);
         this.setState({
           lat: reply.data.lat,
           centerlat: reply.data.lat,
@@ -133,27 +127,43 @@ class Container extends React.Component {
           parks: JSON.parse(reply.data.parks),
           cities: reply.data.cities,
           searched: true
-        },
-        ()=> { console.log('NEWMIDPOINTSTATE:', this.state.lat, this.state.lng, this.state.parks); });
+        });
       });
   }
 
-  handleCardCityInput(e, number) {
-    let oldState = this.state.cards;
-    oldState[number].city = e.target.value;
-    console.log('OLD STATE', oldState);
-    this.setState({
-      cards: oldState,
-    }, ()=>{ console.log('Newstate', this.state.cards); });
+  saveTrip = () => {
+    let result = [];
+    this.state.cards.forEach(card => {
+      result.push([`${card.city}, ${card.state}`]);
+    });
+    
+    axios(
+      {
+        method: 'POST',
+        url: `${api_url}/api/account`,
+        data: {
+          'email': this.props.email,
+          'cities': result,
+          'parks': this.state.parks.data
+        }
+      })
+      .then((res) => console.log(res));
   }
 
-  handleCardStateInput(e, number) {
+  handleCardCityInput = (e, number) => {
     let oldState = this.state.cards;
-    oldState[number].state = e.target.value;
-    console.log('OLD STATE', oldState);
+    oldState[number].city = e.target.value;
     this.setState({
       cards: oldState,
-    }, ()=>{ console.log('Newstate', this.state.cards); });
+    });
+  }
+
+  handleCardStateInput = (e, number) => {
+    let oldState = this.state.cards;
+    oldState[number].state = e.target.value;
+    this.setState({
+      cards: oldState,
+    });
   }
 
   render() {
@@ -178,6 +188,14 @@ class Container extends React.Component {
               color="primary"
               className={classes.button} >
               Search For Parks
+            </Button>
+            <Button
+              onClick={() => this.saveTrip()}
+              variant="contained"
+              size="large"
+              color="primary"
+              className={classes.button} >
+              Save Search
             </Button>
           </div>
         </div>

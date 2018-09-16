@@ -18,9 +18,7 @@ export default class Map extends React.Component {
       this.setState({
         lat: this.props.coordinates.centerLat,
         lng: this.props.coordinates.centerLng,
-      }
-      // , () => { console.log('newLAt State', this.state.lat); }
-      );
+      });
     }
   }
 

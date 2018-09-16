@@ -6,11 +6,6 @@ export default class Location extends React.Component {
     this.state = {};
   }
 
-  componentDidMount() {
-    console.log('NEW COORDS FOR LOCATION.JSXs', this.props.lat, this.props.lng);
-
-  }
-
   render() {
     return (
       <img style={{height: '25px', width: '25px'}}

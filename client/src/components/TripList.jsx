@@ -22,13 +22,9 @@ class TripList extends React.Component {
     super(props);
   }
 
-  // componentDidMount() {
-  //   this.props.submitForm(this.props.email);
-  // }
-
   render() {
     const { classes } = this.props;
-    console.log('props in trip list', this.props)
+
     return (
       <div>
         <div>

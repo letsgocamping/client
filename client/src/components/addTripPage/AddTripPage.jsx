@@ -14,7 +14,7 @@ class AddTripPage extends React.Component {
     return (
       <div>
         <Header handleHomeClick={this.props.handleHomeClick}/>
-        <Container />
+        <Container email={this.props.email}/>
       </div>
     );
   }

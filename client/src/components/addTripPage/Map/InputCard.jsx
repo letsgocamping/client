@@ -37,12 +37,7 @@ class InputCard extends React.Component {
     };
   }
 
-  componentDidMount() {
-    console.log('NEW CARD', this.props.number);
-  }
-
   render() {
-
     const { classes } = this.props;
     return (
       <Card className={classes.card}>

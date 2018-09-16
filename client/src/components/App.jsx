@@ -19,14 +19,6 @@ class App extends Component {
     };
   }
 
-  // componentDidMount() {
-  //   if (this.state.email.length > 0) {
-  //     this.submitForm(this.state.email);
-  //   }
-  // }
-
- 
-
   handleHomeClick = () => {
     this.setState({
       email: '',
@@ -41,11 +33,8 @@ class App extends Component {
   }
 
   submitForm = email => {
-    console.log('you submitted a form!');
-    console.log(email);
     axios.get(`${api_url}/api/account/${email}`)
       .then(res => {
-        console.log(res);
         if (!res.data.length) {
           this.setState({
             redirectToAddTrip: true,
@@ -78,6 +67,7 @@ class App extends Component {
           return <AddTripPage 
             router={props}
             handleHomeClick={this.handleHomeClick}
+            email={this.state.email}
           />;
         }} />
         <Route exact path="/decisions" component={Decisions} />

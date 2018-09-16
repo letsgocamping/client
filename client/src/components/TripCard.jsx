@@ -14,8 +14,7 @@ const styles = theme => ({
   },
   textDesktop: {
     display: 'flex',
-    flexDirection: 'column',
-    maxWidth: '350px'
+    flexDirection: 'column'
   },
   contentDesktop: {
     flex: '1 0 auto',
@@ -24,8 +23,7 @@ const styles = theme => ({
   imageDesktop: {
     width: 189,
     height: 189,
-    position: 'relative',
-    margin: 'auto 0 auto 10px'
+    position: 'relative'
   },
   buttonsDesktop: {
     display: 'flex',
@@ -36,6 +34,43 @@ const styles = theme => ({
 class TripCard extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      citiesString: '',
+      parksString: ''
+    };
+  }
+
+  componentDidMount() {
+    this.getParksList();
+    this.getCitiesList();
+  }
+
+  getParksList = () => {
+    let string = '';
+    let array = this.props.trip.parks;
+    for (let i = 0; i < array.length; i++) {
+      if (i === array.length - 1) {
+        string = string.concat(array[i].fullName);
+      } else {
+        string = string.concat(array[i].fullName, ', ');
+      }
+    }
+
+    this.setState({ parksString: string });
+  }
+
+  getCitiesList = () => {
+    let string = '';
+    let array = this.props.trip.cities;
+    for (let i = 0; i < array.length; i++) {
+      if (i === array.length - 1) {
+        string = string.concat(array[i]);
+      } else {
+        string = string.concat(array[i], ', ');
+      }
+    }
+
+    this.setState({ citiesString: string });
   }
 
   render() {
@@ -46,8 +81,8 @@ class TripCard extends React.Component {
         <Card className={classes.cardDesktop}>
           <CardMedia
             className={classes.imageDesktop}
-            image='https://www.nps.gov/common/uploads/structured_data/3C7D2FBB-1DD8-B71B-0BED99731011CFCE.jpg'
-            title='Not sure what to put here'
+            image={this.props.trip.parks[0].images[0].url}
+            title={this.props.trip.parks[0].images[0].title}
           />
           <div className={classes.textDesktop}>
             <CardContent className={classes.contentDesktop}>
@@ -57,23 +92,15 @@ class TripCard extends React.Component {
               <Typography variant="title">
               Parks
               </Typography>
-              {this.props.trip.parks.map((park, index) => {
-                return (
-                  <Typography key={index} paragraph>
-                    {park}
-                  </Typography>
-                );
-              })}
+              <Typography paragraph>
+                {this.state.parksString}
+              </Typography>
               <Typography variant="title">
               Cities
               </Typography>
-              {this.props.trip.cities.map((city, index) => {
-                return (
-                  <Typography key={index} paragraph>
-                    {city}
-                  </Typography>
-                );
-              })}
+              <Typography paragraph>
+                {this.state.citiesString}
+              </Typography>
             </CardContent>
           </div>
         </Card>
