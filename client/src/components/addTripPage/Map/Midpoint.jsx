@@ -9,7 +9,7 @@ export default class MidPoint extends React.Component {
   render() {
     return (
       <img style={{height: '25px', width: '25px'}}
-        src={'https://github.com/letsgocamping/client/blob/master/client/dist/assets/Campfire-PNG-Transparent.png?raw=true'} />
+        src={'https://github.com/letsgocamping/client/blob/dev/client/dist/assets/icons8-marker-26.png?raw=true'} />
     );
   }
 }
