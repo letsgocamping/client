@@ -21,6 +21,7 @@ const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
+    marginTop: 0,
     width: '80%',
   },
   button: {
@@ -45,13 +46,11 @@ class InputCard extends React.Component {
     const { classes } = this.props;
     return (
       <Card className={classes.card}>
-        <CardActionArea>
-          <CardContent>
-            <Typography gutterBottom variant="headline" component="h2">
+        <CardContent>
+          <Typography gutterBottom variant="headline" component="h2">
             Member City
-            </Typography>
-          </CardContent>
-        </CardActionArea>
+          </Typography>
+        </CardContent>
         <CardActions>
           <TextField
             id="City"
