@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from './Header.jsx';
-import Map from '../Map.jsx';
+import Container from './Map/Container.jsx';
 
 class AddTripPage extends React.Component {
   constructor(props) {
@@ -14,7 +14,7 @@ class AddTripPage extends React.Component {
     return (
       <div style={{ backgroundColor: '#fff7e4' }}>
         <Header />
-        <Map />
+        <Container />
       </div>
     );
   }

@@ -1,3 +1,4 @@
 /client/dist/bundle.js
 .env
 /node_modules
+/client/src/components/addTripPage/Map/Container.jsx
