@@ -68,6 +68,7 @@ class App extends Component {
             router={props}
             handleHomeClick={this.handleHomeClick}
             email={this.state.email}
+            trips={this.state.trips}
           />;
         }} />
         <Route exact path="/decisions" component={Decisions} />

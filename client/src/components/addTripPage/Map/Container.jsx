@@ -120,6 +120,7 @@ class Container extends React.Component {
       result.push([card.city, card.state]);
     });
 
+    console.log(result);
     axios(
       {method: 'POST',
         url: `${api_url}/api/midpoint`,
@@ -146,7 +147,8 @@ class Container extends React.Component {
           cities: reply.data.cities,
           searched: true
         });
-      });
+      })
+      .catch((err) => console.error(err));
   }
 
   saveTrip = () => {
