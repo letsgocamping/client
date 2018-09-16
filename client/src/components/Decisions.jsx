@@ -78,9 +78,11 @@ class Decisions extends React.Component {
               </Link>
             </div>
             <div>
-              <Button variant="contained">
-                VIEW PREVIOUS TRIPS
-              </Button>
+              <Link to="/triplist" className={classes.link}>
+                <Button variant="contained">
+                  VIEW PREVIOUS TRIPS
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
