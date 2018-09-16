@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { api_url } from '../../../config.js';
+import { api_url } from '../../../../../config.js';
 
 export default class Location extends React.Component {
   constructor(props) {
