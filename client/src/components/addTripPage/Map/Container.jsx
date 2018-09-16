@@ -17,15 +17,16 @@ const style = theme => ({
   main: {
     display: 'grid',
     height: '100vh',
-    gridTemplateColumns: '1fr 1fr',
+    gridTemplateColumns: '1fr 1fr'
   },
   button: {
-    margin: theme.spacing.unit,
-    marginRight: '200px'
+    margin: '0 auto'
   },
   root: {
     flexGrow: 1,
-    backgroundColor: theme.palette.background.paper
+    backgroundColor: theme.palette.background.paper,
+    border: '1px solid #4054B2',
+    height: '100%'
   }
 
 });
@@ -42,7 +43,7 @@ class Container extends React.Component {
       cards: [{ number: 0, city: null, state: null }],
       cardNumber: 0,
       cities: [],
-      parks: {},
+      parks: null,
       searched: false
     };
     this.tabSelect = this.tabSelect.bind(this);
@@ -90,7 +91,11 @@ class Container extends React.Component {
     if (this.state.tab === 0) {
       return <Map coordinates={{ lng: this.state.lng, lat: this.state.lat }} apiKey={this.state.key} users={this.state.cities} searched={this.state.searched}/>;      
     } else {
-      return <ParksList parks={this.state.parks.data}/>;
+      if (this.state.parks) {
+        return <ParksList parks={this.state.parks.data} />;
+      } else {
+        return <Typography style={{ margin: '20px'}}>Enter at least two cities and we'll show you a list of parks!</Typography>;
+      }
     }
   }
 
@@ -154,20 +159,23 @@ class Container extends React.Component {
 
     return (
       <div className={classes.main}>
-        <div style={{ gridRow: 2 / 3, gridColumn: 1 / 2 }}>
+        <div style={{ gridRow: 2 / 3, gridColumn: 1 / 2, backgroundColor: 'lightgray' }}>
           {this.state.cards.map(card =>{
             return <InputCard key={card.number} number={this.state.cardNumber} handleCardCityInput={this.handleCardCityInput} handleCardStateInput={this.handleCardStateInput} submitCity={this.submitCity}/>;
           })}
-          <Button onClick={()=> { this.addCard(); }} variant="fab" color="primary" aria-label="Add" className={classes.button}>
-            <AddIcon />
-          </Button>
-          <Button
-            onClick={() => this.submitCities()}
-            size="large"
-            color="primary"
-            className={classes.button} >
-            Submit
-          </Button>
+          <div style={{ display: 'flex' }}>
+            <Button onClick={() => { this.addCard(); }} variant="contained" color="primary" aria-label="Add" className={classes.button}>
+              Add City
+            </Button>
+            <Button
+              onClick={() => this.submitCities()}
+              variant="contained"
+              size="large"
+              color="primary"
+              className={classes.button} >
+              Search For Parks
+            </Button>
+          </div>
         </div>
         <div className='map-container'>
           <div className={classes.root}>
@@ -177,7 +185,7 @@ class Container extends React.Component {
                 <Tab label="List" />
               </Tabs>
             </AppBar>
-            {value === 0 && <TabContainer></TabContainer>}
+            {value === 0 && <TabContainer>Map</TabContainer>}
             {value === 1 && <TabContainer>List</TabContainer>}
             {this.tabSelect()}
           </div>

@@ -58,7 +58,7 @@ export default class Map extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={{ height: '92.5%' }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: this.props.apiKey, libraries: 'places' }}
           center = {

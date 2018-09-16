@@ -12,7 +12,8 @@ import Typography from '@material-ui/core/Typography';
 
 const styles = theme => ({
   card: {
-    maxWidth: '100%'
+    maxWidth: '90%',
+    margin: '10px auto'
   },
   media: {
     objectFit: 'cover',
