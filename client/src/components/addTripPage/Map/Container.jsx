@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import InputCard from './InputCard.jsx';
+import { api_key } from '../../../../../config.js';
 
 
 const style = theme => ({
@@ -39,8 +40,8 @@ class Container extends React.Component {
       lng: -97.314835,
       lat: 37.697948,
       tab: 0,
-      key: 'AIzaSyD644KvZJ8e2fs284KNmttNHnmmip0Kyf8',
-      cards: [{ number: 0, city: null }],
+      key: api_key,
+      cards: [{ number: 0, city: null, state: null }],
       cardNumber: 0,
       cities: [],
       parks: {
@@ -94,8 +95,9 @@ class Container extends React.Component {
       }
     };
     this.tabSelect = this.tabSelect.bind(this);
-    this.submitCity = this.submitCity.bind(this);
-    this.handleCardInput = this.handleCardInput.bind(this);
+    this.handleCardCityInput = this.handleCardCityInput.bind(this);
+    this.handleCardStateInput = this.handleCardStateInput.bind(this);
+    this.submitCities = this.submitCities.bind(this);
   }
 
   TabContainer(props) {
@@ -149,15 +151,25 @@ class Container extends React.Component {
   }
 
 
-  submitCity() {
-    this.setState({
-      cities: this.state.cities.concat([this.state.name])
+  submitCities() {
+    let result = [];
+    this.state.cards.forEach(card=>{
+
     });
   }
 
-  handleCardInput(e, number) {
+  handleCardCityInput(e, number) {
     let oldState = this.state.cards;
     oldState[number].city = e.target.value;
+    console.log('OLD STATE', oldState);
+    this.setState({
+      cards: oldState,
+    }, ()=>{ console.log('Newstate', this.state.cards); });
+  }
+
+  handleCardStateInput(e, number) {
+    let oldState = this.state.cards;
+    oldState[number].state = e.target.value;
     console.log('OLD STATE', oldState);
     this.setState({
       cards: oldState,
@@ -173,10 +185,17 @@ class Container extends React.Component {
       <div className={classes.main}>
         <div style={{ gridRow: 2 / 3, gridColumn: 1 / 2 }}>
           {this.state.cards.map(card =>{
-            return <InputCard key={card.number} number={this.state.cardNumber} handleCardInput={this.handleCardInput} submitCity={this.submitCity}/>;
+            return <InputCard key={card.number} number={this.state.cardNumber} handleCardCityInput={this.handleCardCityInput} handleCardStateInput={this.handleCardStateInput} submitCity={this.submitCity}/>;
           })}
           <Button onClick={()=> { this.addCard(); }} variant="fab" color="primary" aria-label="Add" className={classes.button}>
             <AddIcon />
+          </Button>
+          <Button
+            onClick={() => this.submitCities()}
+            size="large"
+            color="primary"
+            className={classes.button} >
+            Submit
           </Button>
         </div>
         <div className='map-container'>
