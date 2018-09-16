@@ -13,7 +13,7 @@ class AddTripPage extends React.Component {
   render() {
     return (
       <div>
-        <Header />
+        <Header handleHomeClick={this.props.handleHomeClick}/>
         <Container />
       </div>
     );

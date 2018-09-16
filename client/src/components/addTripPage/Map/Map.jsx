@@ -1,10 +1,7 @@
 import React from 'react';
 import GoogleMapReact from 'google-map-react';
 import Location from './Location.jsx';
-import { fitBounds } from 'google-map-react/utils';
 import UserLocation from './UserLocation.jsx';
-
-
 
 export default class Map extends React.Component {
   constructor(props) {
@@ -16,10 +13,7 @@ export default class Map extends React.Component {
     };
   }
 
-
-
   componentDidUpdate(prevProps) {
-    
     if (this.props.coordinates !== prevProps.coordinates) {
       this.setState({
         lat: this.props.coordinates.centerLat,
@@ -30,11 +24,9 @@ export default class Map extends React.Component {
     }
   }
 
-
-
   render() {
     return (
-      <div>
+      <div style={{ height: '92.5%' }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: this.props.apiKey, libraries: 'places' }}
           center = {
