@@ -27,9 +27,7 @@ class TripList extends React.Component {
 
     return (
       <div>
-        <div>
-          <Header /> 
-        </div>
+        <Header /> 
         <div className={classes.background}>
           <Grid container className={classes.grid}>
             {this.props.trips.map((trip, index) => {

@@ -42,7 +42,7 @@ class Container extends React.Component {
       lat: 37.697948,
       tab: 0,
       key: api_key,
-      cards: [{ number: 1, city: null, state: null }],
+      cards: [{ number: 0, city: null, state: null }],
       cardNumber: 1,
       cities: [],
       parks: {},
@@ -161,14 +161,15 @@ class Container extends React.Component {
           'parks': this.state.parks.data
         }
       })
-      .then((res) => console.log(res));
+      .then((res) => console.log(res))
+      .catch((err) => console.error(err));
   }
 
   handleCardCityInput = (e, number) => {
     let oldState = this.state.cards;
     oldState[number].city = e.target.value;
     this.setState({
-      cards: oldState,
+      cards: oldState
     });
   }
 
@@ -176,7 +177,7 @@ class Container extends React.Component {
     let oldState = this.state.cards;
     oldState[number].state = e.target.value;
     this.setState({
-      cards: oldState,
+      cards: oldState
     });
   }
 
