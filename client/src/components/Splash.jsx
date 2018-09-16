@@ -1,6 +1,8 @@
 import React from 'react';
-import { TextField, Typography } from '@material-ui/core';
+import { TextField, Typography, Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
+import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 const styles = theme => ({
   background: {
@@ -49,7 +51,9 @@ class Splash extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: ''
+      email: '',
+      redirectToAddTrip: false,
+      redirectToDecisions: false
     };
   }
 
@@ -57,8 +61,43 @@ class Splash extends React.Component {
     this.setState({ email: e.target.value });
   }
 
+  handleEnterPress = e => {
+    if (e.key === 'Enter') {
+      this.submitForm(this.state.email);
+    }
+  }
+
+  submitForm = email => {
+    console.log('you submitted a form!');
+    console.log(email);
+    axios.get(`http://localhost:1337/api/account/${email}`)
+      .then(res => {
+        console.log(res);
+        if (!res.data.length) {
+          this.setState({
+            redirectToAddTrip: true
+          });
+        } else {
+          this.setState({
+            redirectToDecisions: true
+          });
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
   render() {
     const { classes } = this.props;
+
+    if (this.state.redirectToAddTrip) {
+      return (<Redirect to={{ pathname: '/add-trip'}} />);
+    }
+
+    if (this.state.redirectToDecisions) {
+      return (<Redirect to={{ pathname: '/decisions'}} />);
+    }
 
     return (
       <div className={classes.background}>
@@ -71,6 +110,7 @@ class Splash extends React.Component {
               className={classes.textField}
               value={this.state.email}
               onChange={this.handleChange}
+              onKeyPress={this.handleEnterPress}
               margin="normal"
               InputProps={{
                 className: classes.input,
