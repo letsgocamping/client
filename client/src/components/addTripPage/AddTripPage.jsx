@@ -13,7 +13,7 @@ class AddTripPage extends React.Component {
   render() {
     return (
       <div style={{ backgroundColor: '#fff7e4' }}>
-        <Header />
+        <Header handleHomeClick={this.props.handleHomeClick}/>
         <Container />
       </div>
     );
