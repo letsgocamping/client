@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -22,6 +23,9 @@ const styles = theme => ({
   text: {
     color: 'white',
     textShadow: '0 0 20px black'
+  }, 
+  link: {
+    textDecoration: 'none'
   }
 });
 
@@ -32,7 +36,9 @@ class Header extends React.Component {
       <div className={classes.background}>
         <div className={classes.foreground}>
           <div className={classes.section}>
-            <Typography variant='display2' className={classes.text}>Let's Go Camping!</Typography>
+            <Link to="/" className={classes.link}>
+              <Typography variant='display2' className={classes.text}>Let's Go Camping!</Typography>
+            </Link>
           </div>
         </div>
       </div>

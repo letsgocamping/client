@@ -1,6 +1,7 @@
 import React from 'react';
 import { Typography, Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
 
 const styles = theme => ({
   background: {
@@ -46,6 +47,9 @@ const styles = theme => ({
   },
   button: {
     marginBottom: '20px'
+  },
+  link: {
+    textDecoration: 'none'
   }
 });
 
@@ -67,9 +71,11 @@ class Decisions extends React.Component {
               </Typography>
             </div>
             <div>
-              <Button variant="contained" className={classes.button}>
-                ADD NEW TRIP
-              </Button>
+              <Link to="/add-trip" className={classes.link}>
+                <Button variant="contained" className={classes.button}>
+                  ADD NEW TRIP
+                </Button>
+              </Link>
             </div>
             <div>
               <Button variant="contained">
