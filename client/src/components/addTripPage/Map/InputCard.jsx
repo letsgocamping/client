@@ -67,6 +67,7 @@ class InputCard extends React.Component {
               });
               this.props.handleCardStateInput(e, this.props.number); 
             }}
+            style={{ position: 'relative', top: '4px' }}
           >
             <MenuItem value="AL">AL</MenuItem>
             <MenuItem value="AK">AK</MenuItem>
