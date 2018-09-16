@@ -14,7 +14,8 @@ const styles = theme => ({
   },
   textDesktop: {
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    width: '80%'
   },
   contentDesktop: {
     flex: '1 0 auto',
@@ -22,7 +23,6 @@ const styles = theme => ({
   },
   imageDesktop: {
     width: 189,
-    height: 189,
     position: 'relative'
   },
   buttonsDesktop: {
