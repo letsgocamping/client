@@ -6,15 +6,11 @@ import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
-
-
-
-
-
-
-
-
+import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/Add';
+import InputCard from './InputCard.jsx';
 
 
 const style = theme => ({
@@ -22,6 +18,10 @@ const style = theme => ({
     display: 'grid',
     height: '100vh',
     gridTemplateColumns: '1fr 1fr',
+  },
+  button: {
+    margin: theme.spacing.unit,
+    marginRight: '200px'
   },
   root: {
     flexGrow: 1,
@@ -38,8 +38,12 @@ class Container extends React.Component {
       lng: -97.314835,
       lat: 37.697948,
       tab: 0,
+      key: 'AIzaSyBeT_xIj_GserJq4MuzMyjDylzYmkpiD6k',
+      cards: [{}],
+      cardNumber: 1
     };
     this.tabSelect = this.tabSelect.bind(this);
+    this.renderCards = this.renderCards.bind(this);
   }
 
   TabContainer(props) {
@@ -58,7 +62,6 @@ class Container extends React.Component {
   };
 
   componentWillMount() {
-    console.log('ENV VARIABLE', process.env.GOOGLEMAPS_API_KEY);
     axios(
       {
         method: 'GET',
@@ -86,6 +89,18 @@ class Container extends React.Component {
     }
   }
 
+  addCard() {
+    this.setState({
+      cards: this.state.cards.concat([{}]),
+    }, ()=> { console.log('cardNumber', this.state.cardNumber); });
+  }
+
+  renderCards() {
+    for (var i = 0; i < this.state.cards; i++) {
+      return <InputCard />;
+    }
+  }
+
   render() {
     const { classes, coordinates } = this.props;
     const { value } = this.state;
@@ -94,9 +109,14 @@ class Container extends React.Component {
     return (
       <div className={classes.main}>
         <div style={{ gridRow: 2 / 3, gridColumn: 1 / 2 }}>
-          <input value={this.state.lat }onChange={(e)=>{ this.handleEnter(e); }} />
+          {/* {this.renderCards()} */}
+          {this.state.cards.map(card =>{
+            return <InputCard number={this.state.cardNumber}/>;
+          })}
+          <Button onClick={()=> { this.addCard(); }} variant="fab" color="primary" aria-label="Add" className={classes.button}>
+            <AddIcon />
+          </Button>
         </div>
-        {/* <SearchBox /> */}
         <div className='map-container'>
           <div className={classes.root}>
             <AppBar position="static">
