@@ -1,18 +1,17 @@
 import React from 'react';
 import Map from './Map.jsx';
-import SearchBox from './SearchBox.jsx';
 import ParksList from './ParksList.jsx';
 import axios from 'axios';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import InputCard from './InputCard.jsx';
-import { api_url, api_key } from '../../../../../config';
+import { api_key, api_url } from '../../../../../config.js';
+
 
 const style = theme => ({
   main: {
@@ -40,13 +39,15 @@ class Container extends React.Component {
       lat: 37.697948,
       tab: 0,
       key: api_key,
-      cards: [{}],
-      cities: [['San Diego', 'CA'], ['Sacramento', 'CA']],
+      cards: [{ number: 0, city: null, state: null }],
+      cardNumber: 0,
+      cities: [],
       parks: {}
     };
     this.tabSelect = this.tabSelect.bind(this);
-    this.submitCity = this.submitCity.bind(this);
-    this.handleCardInput = this.handleCardInput.bind(this);
+    this.handleCardCityInput = this.handleCardCityInput.bind(this);
+    this.handleCardStateInput = this.handleCardStateInput.bind(this);
+    this.submitCities = this.submitCities.bind(this);
   }
 
   componentDidMount() {
@@ -107,22 +108,52 @@ class Container extends React.Component {
 
   addCard() {
     this.setState({
-      cards: this.state.cards.concat([{}]),
-    });
+      cardNumber: this.state.cardNumber + 1,
+      cards: this.state.cards.concat([{number: this.state.cardNumber, city: null}]),
+    }, ()=>{ console.log('Cards:', this.state.cards, this.state.cardNumber); });
   }
 
 
-  submitCity() {
-    this.setState({
-      cities: this.state.cities.concat([this.state.name])
+  submitCities() {
+    console.log('SUBMITCITIES');
+    let result = [];
+    this.state.cards.forEach(card=>{
+      result.push([card.city, card.state]);
     });
+
+    axios(
+      {method: 'POST',
+        url: `${api_url}/api/midpoint`,
+        data: {
+          'cities': result
+        }
+      })
+      .then((reply) =>{
+        console.log('RESPLY', reply);
+        this.setState({
+          lat: reply.data.lat,
+          lng: reply.data.lon
+        },
+        ()=> { console.log('NEWMIDPOINTSTATE:', this.state.lat, this.state.lng); });
+      });
   }
 
-  handleCardInput(e) {
-    console.log('CARDINPUT', e.target.value);
+  handleCardCityInput(e, number) {
+    let oldState = this.state.cards;
+    oldState[number].city = e.target.value;
+    console.log('OLD STATE', oldState);
     this.setState({
-      state: e.target.value,
-    });
+      cards: oldState,
+    }, ()=>{ console.log('Newstate', this.state.cards); });
+  }
+
+  handleCardStateInput(e, number) {
+    let oldState = this.state.cards;
+    oldState[number].state = e.target.value;
+    console.log('OLD STATE', oldState);
+    this.setState({
+      cards: oldState,
+    }, ()=>{ console.log('Newstate', this.state.cards); });
   }
 
   render() {
@@ -134,10 +165,17 @@ class Container extends React.Component {
       <div className={classes.main}>
         <div style={{ gridRow: 2 / 3, gridColumn: 1 / 2 }}>
           {this.state.cards.map(card =>{
-            return <InputCard number={this.state.cardNumber} handleCardInput={this.handleCardInput} submitCity={this.submitCity}/>;
+            return <InputCard key={card.number} number={this.state.cardNumber} handleCardCityInput={this.handleCardCityInput} handleCardStateInput={this.handleCardStateInput} submitCity={this.submitCity}/>;
           })}
           <Button onClick={()=> { this.addCard(); }} variant="fab" color="primary" aria-label="Add" className={classes.button}>
             <AddIcon />
+          </Button>
+          <Button
+            onClick={() => this.submitCities()}
+            size="large"
+            color="primary"
+            className={classes.button} >
+            Submit
           </Button>
         </div>
         <div className='map-container'>
