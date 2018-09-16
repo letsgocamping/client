@@ -42,7 +42,7 @@ class Container extends React.Component {
       lat: 37.697948,
       tab: 0,
       key: api_key,
-      cards: [{ number: 0, city: null, state: null }],
+      cards: [{ number: 1, city: null, state: null }],
       cardNumber: 1,
       cities: [],
       parks: {},
@@ -70,7 +70,7 @@ class Container extends React.Component {
     axios(
       {
         method: 'GET',
-        url: 'http://localhost:1337/api/googlemaps',
+        url: `${api_url}/api/googlemaps`,
       })
       .then(reply => {
         const apiKey = reply.data.key;
