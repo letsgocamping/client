@@ -161,7 +161,10 @@ class Container extends React.Component {
           'parks': this.state.parks.data
         }
       })
-      .then((res) => console.log(res))
+      .then((res) => {
+        alert('Your search was successfully saved!');
+        console.log(res);
+      })
       .catch((err) => console.error(err));
   }
 

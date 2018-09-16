@@ -62,7 +62,6 @@ class InputCard extends React.Component {
             margin="normal"
             value={this.state.state}
             onChange={(e) => { 
-              console.log('e', e.target.value)
               this.setState({
                 state: e.target.value
               });
