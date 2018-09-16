@@ -12,7 +12,7 @@ const styles = theme => ({
   foreground: {
     backgroundColor: 'rgba(0, 0, 0, 0.4)',
     height: '28vh',
-    width: '100vw',
+    width: '100%',
     display: 'table'
   },
   section: {

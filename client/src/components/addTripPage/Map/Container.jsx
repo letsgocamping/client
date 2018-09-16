@@ -42,7 +42,7 @@ class Container extends React.Component {
       lat: 37.697948,
       tab: 0,
       key: api_key,
-      cards: [{ number: 0, city: null, state: null }],
+      cards: [{ number: 1, city: null, state: null }],
       cardNumber: 1,
       cities: [],
       parks: {},
@@ -105,7 +105,7 @@ class Container extends React.Component {
   addCard = () => {
     this.setState({
       cardNumber: this.state.cardNumber + 1,
-      cards: this.state.cards.concat([{number: this.state.cardNumber, city: null}]),
+      cards: this.state.cards.concat([{number: this.state.cardNumber + 1, city: null}]),
     });
   }
 
