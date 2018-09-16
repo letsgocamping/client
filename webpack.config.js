@@ -10,6 +10,7 @@ var DIST_DIR = path.join(__dirname, '/client/dist');
 var path = require('path');
 
 module.exports = {
+
   entry: `${SRC_DIR}/index.jsx`,
   output: {
     path: DIST_DIR,
@@ -22,7 +23,22 @@ module.exports = {
       use: {
         loader: 'babel-loader',
         options: {
-          presets: ['es2015', 'react']
+          presets: ['es2015', 'react'],
+          plugins: [
+            [
+              'transform-class-properties'
+            ],
+            [
+              'transform-async-to-generator'
+            ],
+            [
+              'transform-runtime',
+              {
+                'polyfill': false,
+                'regenerator': true
+              }
+            ]
+          ]
         }
       }
     },
@@ -38,7 +54,21 @@ module.exports = {
         loader: 'sass-loader' // compiles Sass to CSS
       }
       ]
+    },
+    {
+      test: /\.(gif|png|jpe?g|svg)$/i,
+      use: [
+        'file-loader',
+        {
+          loader: 'image-webpack-loader',
+          options: {
+            bypassOnDebug: true, // webpack@1.x
+            disable: true, // webpack@2.x and newer
+          },
+        },
+      ],
     }
-    ]
+    ],
+
   }
 };
