@@ -70,7 +70,7 @@ class Container extends React.Component {
     axios(
       {
         method: 'GET',
-        url: 'http://localhost:1337/api/googlemaps',
+        url: `${api_url}/api/googlemaps`,
       })
       .then(reply => {
         const apiKey = reply.data.key;
