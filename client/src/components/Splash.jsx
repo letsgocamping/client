@@ -52,7 +52,8 @@ class Splash extends React.Component {
     super(props);
     this.state = {
       email: '',
-      redirectToAddTrip: false
+      redirectToAddTrip: false,
+      redirectToDecisions: false
     };
   }
 
@@ -76,6 +77,10 @@ class Splash extends React.Component {
           this.setState({
             redirectToAddTrip: true
           });
+        } else {
+          this.setState({
+            redirectToDecisions: true
+          });
         }
       })
       .catch(err => {
@@ -87,7 +92,11 @@ class Splash extends React.Component {
     const { classes } = this.props;
 
     if (this.state.redirectToAddTrip) {
-      return (<Redirect to={{ pathname: '/add-trip'}}/>)
+      return (<Redirect to={{ pathname: '/add-trip'}} />);
+    }
+
+    if (this.state.redirectToDecisions) {
+      return (<Redirect to={{ pathname: '/decisions'}} />);
     }
 
     return (
