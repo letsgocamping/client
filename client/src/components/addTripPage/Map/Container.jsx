@@ -45,7 +45,8 @@ class Container extends React.Component {
       cards: [{ number: 0, city: null, state: null }],
       cardNumber: 1,
       cities: [],
-      parks: null,
+      parks: {},
+      parksParse: [],
       searched: false
     };
   }
@@ -87,7 +88,11 @@ class Container extends React.Component {
 
   tabSelect = () => {
     if (this.state.tab === 0) {
-      return <Map coordinates={{ lng: this.state.lng, lat: this.state.lat, centerLat: this.state.centerLat, centerLng: this.state.centerLng }} apiKey={this.state.key} users={this.state.cities} searched={this.state.searched}/>;      
+      return <Map coordinates={{ lng: this.state.lng, lat: this.state.lat, centerLat: this.state.centerLat, centerLng: this.state.centerLng }} 
+        apiKey={this.state.key} 
+        users={this.state.cities} 
+        searched={this.state.searched}
+        parks={this.state.parksParse}/>;      
     } else {
       if (this.state.parks) {
         return <ParksList parks={this.state.parks.data} />;
@@ -119,12 +124,21 @@ class Container extends React.Component {
         }
       })
       .then((reply) =>{
+        let parksParse = JSON.parse(reply.data.parks);
+        let parksCoords = parksParse.data.map(park =>{
+          let split = park.latLong.split(',');
+          let lat = split[0].slice(split[0].indexOf(':') + 1, split[0].length - 1);
+          let lng = split[1].slice(split[1].indexOf(':') + 1, split[1].length - 1);
+          return [Number(lat), Number(lng)];
+        });
+
         this.setState({
           lat: reply.data.lat,
           centerlat: reply.data.lat,
           centerlng: reply.data.lon,
           lng: reply.data.lon,
           parks: JSON.parse(reply.data.parks),
+          parksParse: parksCoords,
           cities: reply.data.cities,
           searched: true
         });
@@ -136,7 +150,7 @@ class Container extends React.Component {
     this.state.cards.forEach(card => {
       result.push([`${card.city}, ${card.state}`]);
     });
-    
+
     axios(
       {
         method: 'POST',
