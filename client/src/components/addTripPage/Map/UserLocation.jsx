@@ -6,6 +6,7 @@ export default class UserLocation extends React.Component {
     this.state = {};
   }
 
+  
   render() {
     return (
       <img style={{ height: '25px', width: '25px' }}

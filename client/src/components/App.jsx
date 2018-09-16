@@ -8,13 +8,6 @@ import { withStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 import { api_url } from '../../../config.js';
 
-// const styles = theme => ({
-//   app: {
-//     display: 'table',
-//     height: '100vh',
-//     margin: '0 auto'
-//   }
-// });
 class App extends Component {
   constructor(props) {
     super(props);
