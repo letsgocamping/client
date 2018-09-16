@@ -1,8 +1,7 @@
 import React from 'react';
 import { TextField, Typography, Button } from '@material-ui/core';
+import ForwardIcon from '@material-ui/icons/Forward';
 import { withStyles } from '@material-ui/core/styles';
-import axios from 'axios';
-import { api_url } from '../../../config.js';
 import { Redirect } from 'react-router-dom';
 
 const styles = theme => ({
@@ -14,7 +13,7 @@ const styles = theme => ({
   foreground: {
     backgroundColor: 'rgba(0, 0, 0, 0.4)',
     height: '100vh',
-    width: '100vw',
+    width: '100%',
     display: 'table'
   },
   section: {
@@ -45,6 +44,11 @@ const styles = theme => ({
   },
   underline: {
     borderBottom: '1px solid white'
+  },
+  arrow: {
+    fill: 'white',
+    position: 'relative',
+    top: '5px'
   }
 });
 
@@ -75,28 +79,31 @@ class Splash extends React.Component {
         <div className={classes.foreground}>
           <div className={classes.section}>
             <Typography variant='display4' className={classes.text}>Let's Go Camping!</Typography>
-            <TextField
-              id="email"
-              label="Email Address"
-              className={classes.textField}
-              value={this.props.email}
-              onChange={this.props.handleChange}
-              onKeyPress={this.handleEnterPress}
-              margin="normal"
-              InputProps={{
-                className: classes.input,
-                classes: {
-                  underline: classes.underline
-                }
-              }}
-              InputLabelProps={{
-                className: classes.placeholder,
-                FormLabelClasses: {
-                  root: classes.formLabelRoot,
-                  focused: classes.formLabelFocused
-                },
-              }}
-            />
+            <div>
+              <TextField
+                id="email"
+                label="Email Address"
+                className={classes.textField}
+                value={this.props.email}
+                onChange={this.props.handleChange}
+                onKeyPress={this.handleEnterPress}
+                margin="normal"
+                InputProps={{
+                  className: classes.input,
+                  classes: {
+                    underline: classes.underline
+                  }
+                }}
+                InputLabelProps={{
+                  className: classes.placeholder,
+                  FormLabelClasses: {
+                    root: classes.formLabelRoot,
+                    focused: classes.formLabelFocused
+                  },
+                }}
+              />
+              <ForwardIcon className={classes.arrow} onClick={() => this.props.submitForm(this.props.email)}/>
+            </div>
           </div>
         </div>
       </div>

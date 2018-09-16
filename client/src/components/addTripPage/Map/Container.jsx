@@ -120,6 +120,7 @@ class Container extends React.Component {
       result.push([card.city, card.state]);
     });
 
+    console.log(result);
     axios(
       {method: 'POST',
         url: `${api_url}/api/midpoint`,
@@ -146,7 +147,8 @@ class Container extends React.Component {
           cities: reply.data.cities,
           searched: true
         });
-      });
+      })
+      .catch((err) => console.error(err));
   }
 
   saveTrip = () => {
@@ -164,6 +166,9 @@ class Container extends React.Component {
           'cities': result,
           'parks': this.state.parks.data
         }
+      })
+      .then((res) => {
+        this.props.getTrips(this.props.email);
       })
       .then((res) => {
         this.setState({
@@ -208,7 +213,7 @@ class Container extends React.Component {
         >
           <DialogTitle id="alert-dialog-title">{'Your search was successfully saved!'}</DialogTitle>
           <DialogActions>
-          <Button onClick={() => {
+            <Button onClick={() => {
               this.setState({
                 renderDialog: false,
                 redirectToPreviousSearches: true
