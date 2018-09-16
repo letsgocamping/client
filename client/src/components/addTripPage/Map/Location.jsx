@@ -11,7 +11,7 @@ export default class Location extends React.Component {
   render() {
     return (
       <img style={{height: '25px', width: '25px'}}
-        src={`${api_url}/images/Campfire-PNG-Transparent.png`} />
+        src={"https://github.com/letsgocamping/client/blob/master/client/dist/assets/Campfire-PNG-Transparent.png?raw=true"} />
     );
   }
 }
