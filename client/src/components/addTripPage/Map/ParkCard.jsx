@@ -25,7 +25,7 @@ const styles = theme => ({
     width: 189,
     height: 189,
     position: 'relative',
-    margin: 'auto'
+    margin: 'auto 0 auto 10px'
   },
   buttonsDesktop: {
     display: 'flex',
