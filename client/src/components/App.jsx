@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom';
 import AddTripPage from './addTripPage/AddTripPage.jsx';
 import Decisions from './Decisions.jsx';
 import Splash from './Splash.jsx';
+import TripList from './TripList.jsx';
 import { withStyles } from '@material-ui/core/styles';
 
 // const styles = theme => ({
@@ -17,6 +18,7 @@ class App extends Component {
     const { classes } = this.props;
     return (
       <div>
+        <Route exact path="/triplist" component={TripList}/>
         <Route exact path="/add-trip" component={AddTripPage} />
         <Route exact path="/decisions" component={Decisions} />
         <Route exact path="/" component={Splash} />
