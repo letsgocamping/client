@@ -12,7 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import InputCard from './InputCard.jsx';
-import { api_key } from '../../../../../config.js';
+import { api_key, api_url } from '../../../../../config.js';
 
 
 const style = theme => ({
@@ -152,10 +152,27 @@ class Container extends React.Component {
 
 
   submitCities() {
+    console.log('SUBMITCITIES');
     let result = [];
     this.state.cards.forEach(card=>{
-
+      result.push([card.city, card.state]);
     });
+
+    axios(
+      {method: 'POST',
+        url: `${api_url}/api/midpoint`,
+        data: {
+          'cities': result
+        }
+      })
+      .then((reply) =>{
+        console.log('RESPLY', reply);
+        this.setState({
+          lat: reply.data.lat,
+          lng: reply.data.lon
+        },
+        ()=> { console.log('NEWMIDPOINTSTATE:', this.state.lat, this.state.lng); });
+      });
   }
 
   handleCardCityInput(e, number) {
