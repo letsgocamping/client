@@ -48,7 +48,7 @@ class InputCard extends React.Component {
       <Card className={classes.card}>
         <CardContent>
           <Typography gutterBottom variant="headline" component="h2">
-            Member City
+            Friend #{this.props.number}
           </Typography>
         </CardContent>
         <CardActions>

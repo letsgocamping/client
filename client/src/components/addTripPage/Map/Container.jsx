@@ -43,7 +43,7 @@ class Container extends React.Component {
       tab: 0,
       key: api_key,
       cards: [{ number: 0, city: null, state: null }],
-      cardNumber: 0,
+      cardNumber: 1,
       cities: [],
       parks: null,
       searched: false
@@ -165,7 +165,7 @@ class Container extends React.Component {
       <div className={classes.main}>
         <div style={{ gridRow: 2 / 3, gridColumn: 1 / 2, backgroundColor: 'lightgray' }}>
           {this.state.cards.map(card =>{
-            return <InputCard key={card.number} number={this.state.cardNumber} handleCardCityInput={this.handleCardCityInput} handleCardStateInput={this.handleCardStateInput} submitCity={this.submitCity}/>;
+            return <InputCard key={card.number} number={card.number} handleCardCityInput={this.handleCardCityInput} handleCardStateInput={this.handleCardStateInput} submitCity={this.submitCity}/>;
           })}
           <div style={{ display: 'flex' }}>
             <Button onClick={() => { this.addCard(); }} variant="contained" color="primary" aria-label="Add" className={classes.button}>
