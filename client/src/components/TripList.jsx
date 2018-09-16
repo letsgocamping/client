@@ -22,9 +22,13 @@ class TripList extends React.Component {
     super(props);
   }
 
+  // componentDidMount() {
+  //   this.props.submitForm(this.props.email);
+  // }
+
   render() {
     const { classes } = this.props;
-
+    console.log('props in trip list', this.props)
     return (
       <div>
         <div>
@@ -35,7 +39,8 @@ class TripList extends React.Component {
             {this.props.trips.map((trip, index) => {
               return <TripCard
                 key={trip.id || index}
-                park={trip}
+                trip={trip}
+                index={index+1}
               />;
             })}
           </Grid>

@@ -21,15 +21,25 @@ class App extends Component {
     this.state = {
       email: '',
       redirectToAddTrip: false,
-      redirectToDecisions: false
+      redirectToDecisions: false,
+      trips: []
     };
   }
+
+  // componentDidMount() {
+  //   if (this.state.email.length > 0) {
+  //     this.submitForm(this.state.email);
+  //   }
+  // }
+
+ 
 
   handleHomeClick = () => {
     this.setState({
       email: '',
       redirectToAddTrip: false,
-      redirectToDecisions: false
+      redirectToDecisions: false,
+      trips: []
     });
   }
 
@@ -45,11 +55,12 @@ class App extends Component {
         console.log(res);
         if (!res.data.length) {
           this.setState({
-            redirectToAddTrip: true
+            redirectToAddTrip: true,
           });
         } else {
           this.setState({
-            redirectToDecisions: true
+            redirectToDecisions: true,
+            trips: res.data
           });
         }
       })
@@ -62,12 +73,19 @@ class App extends Component {
     const { classes } = this.props;
     return (
       <div>
-        <Route exact path="/triplist" component={TripList}/>
+        <Route exact path="/triplist" render={props => {
+          return <TripList 
+            router={props}
+            trips={this.state.trips}
+            submitForm={this.submitForm}
+            email={this.state.email}
+          />;
+        }} />
         <Route exact path="/add-trip" render={props => {
           return <AddTripPage 
             router={props}
             handleHomeClick={this.handleHomeClick}
-          />
+          />;
         }} />
         <Route exact path="/decisions" component={Decisions} />
         <Route exact path="/" render={props => {

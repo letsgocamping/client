@@ -53,11 +53,6 @@ class Splash extends React.Component {
     super(props);
   }
 
-  // handleChange = (e) => {
-  //   this.setState({ email: e.target.value });
-  // }
-
-
   handleEnterPress = e => {
     if (e.key === 'Enter') {
       this.props.submitForm(this.props.email);

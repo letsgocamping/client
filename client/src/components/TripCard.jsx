@@ -47,19 +47,33 @@ class TripCard extends React.Component {
           <CardMedia
             className={classes.imageDesktop}
             image='https://www.nps.gov/common/uploads/structured_data/3C7D2FBB-1DD8-B71B-0BED99731011CFCE.jpg'
-            title={this.props.park.name}
+            title='Not sure what to put here'
           />
           <div className={classes.textDesktop}>
             <CardContent className={classes.contentDesktop}>
-              <Typography color="textSecondary" gutterBottom>
-                {this.props.park.states}
-              </Typography>
               <Typography variant="headline" paragraph>
-                {this.props.park.name}
+                Trip {this.props.index}
               </Typography>
-              <Typography color="textSecondary" paragraph>
-                {this.props.park.description}
+              <Typography variant="title">
+              Parks
               </Typography>
+              {this.props.trip.parks.map((park, index) => {
+                return (
+                  <Typography key={index} paragraph>
+                    {park}
+                  </Typography>
+                );
+              })}
+              <Typography variant="title">
+              Cities
+              </Typography>
+              {this.props.trip.cities.map((city, index) => {
+                return (
+                  <Typography key={index} paragraph>
+                    {city}
+                  </Typography>
+                );
+              })}
             </CardContent>
           </div>
         </Card>
